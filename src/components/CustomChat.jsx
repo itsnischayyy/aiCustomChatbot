@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { Mic, MicOff, Volume2, VolumeX, Send } from "lucide-react";
 
-const SERVER_URL = "http://127.0.0.1:5000"; // Replace with your server's URL or IP
-
 export function LocalChat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
