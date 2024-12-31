@@ -21,7 +21,11 @@ export function LocalChat() {
   const [selectedVoice, setSelectedVoice] = useState(null); // For selected voice
 
   useEffect(() => {
-    fetch(`${SERVER_URL}/instruction_sets`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/instruction_sets`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true", // Add the header with any value
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setInstructions(data);
@@ -33,7 +37,11 @@ export function LocalChat() {
   }, []);
 
   useEffect(() => {
-    fetch(`${SERVER_URL}/new_session`)
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/new_session`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true", // Add the header with any value
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         setSessionId(data.session_id);
@@ -112,9 +120,9 @@ export function LocalChat() {
     try {
       setIsLoading(true);
       const selectedInstructionId = customInstruction || instructionId;
-      const response = await fetch(`${SERVER_URL}/chat`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/chat`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "ngrok-skip-browser-warning": "true" },
         body: JSON.stringify({
           session_id: sessionId,
           instruction_id: selectedInstructionId,
